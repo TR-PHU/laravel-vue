@@ -38,8 +38,9 @@ class HomeController extends Controller
         // }
         // $articles = $articleQuery->latest()
         //                         ->paginate(AppConstant::HOME_ARTICLE_PER_PAGE);
-        $articles = Article::orderBy('created_at', 'desc')->paginate(AppConstant::HOME_ARTICLE_PER_PAGE);
 
+        // $articles = Article::orderBy('created_at', 'desc')->paginate(AppConstant::HOME_ARTICLE_PER_PAGE);
+        $articles = auth()->user()->articles()->orderBy('created_at', 'desc')->paginate(AppConstant::HOME_ARTICLE_PER_PAGE);
         return view('home.index')->with('articles', $articles);
     }
 }
