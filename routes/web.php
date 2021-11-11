@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\User\UserArticleControler;
 use App\Http\Controllers\Admin\AdminArticleControler;
+use App\Http\Controllers\Admin\AdminProfileController;
 use App\Http\Controllers\Admin\UserManageController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeArticleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\User\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,17 +22,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class,'index'])->name('homePage');
+Route::get('/', [HomeController::class, 'index'])->name('homePage');
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function () {
-    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('adminHome');
+    Route::get('/dashboard', [App\Http\Controllers\Admin\AdminArticleControler::class, 'index'])->name('adminHome');
     Route::get('/users', [UserManageController::class, 'index'])->name('admin.manageUser');
     Route::get('/users/block/{user}', [UserManageController::class, 'blockUser'])->name('admin.blockUser');
     Route::get('/users/unblock/{user}', [UserManageController::class, 'unblockUser'])->name('admin.unblockUser');
+    Route::get('/profile', [AdminProfileController::class, 'index'])->name('admin.Profile');
 });
 
-Route::group(['prefix' => 'user', 'middleware' => ['auth','checkBlockUser','role:user']], function () {
+Route::group(['prefix' => 'user', 'middleware' => ['auth', 'checkBlockUser', 'role:user']], function () {
     Route::resource('article', UserArticleControler::class)->names('userArticle');
+    Route::get('/profile', [UserProfileController::class, 'index'])->name('profileUser');
 });
 Route::get('/location/province', [LocationController::class, 'getProvinces'])->name('getProvinces');
 Route::get('/location/province/district/{province}', [LocationController::class, 'getDistricts'])->name('getDistricts');

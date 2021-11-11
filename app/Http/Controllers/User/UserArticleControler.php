@@ -42,11 +42,11 @@ class UserArticleControler extends Controller
     public function store(StoreUserArticleRequest $request)
     {
         $article = new Article;
-        $article->fill( $request->all() );
+        $article->fill($request->all());
 
         auth()->user()->articles()->save($article);
         $article->categories()->attach($request->category_ids);
-        return redirect('/user/article/create');
+        return redirect('/user/article');
     }
 
     /**
@@ -68,7 +68,7 @@ class UserArticleControler extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('user.article.edit')->with('article', $article);
     }
 
     /**
@@ -80,7 +80,9 @@ class UserArticleControler extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        //
+        $article->fill($request->all());
+        $article->save();
+        return redirect('/user/article');
     }
 
     /**
@@ -91,6 +93,7 @@ class UserArticleControler extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect('/user/article');
     }
 }

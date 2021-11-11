@@ -7,8 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AppConstant extends Model
 {
-    const DEFAULT_PER_PAGE = 10;
+    const DEFAULT_PER_PAGE = 4;
     const USER_ARTICLE_PER_PAGE = 10;
-    const HOME_ARTICLE_PER_PAGE = 20;
-    
+    const HOME_ARTICLE_PER_PAGE = 4;
 }

@@ -37,7 +37,7 @@
                     @if(!$user->blocked)
                     <form action="{{ route('admin.blockUser', ['user' => $user]) }}">
                         @csrf
-                        <button class="btn btn-block btn-default btn-sm">Unblock</button>
+                        <button class="btn btn-block btn-default btn-sm">Block</button>
                     </form>
                     @else 
                     <form action="{{ route('admin.unblockUser', ['user' => $user]) }}">

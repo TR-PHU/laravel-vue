@@ -26,18 +26,19 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $articleQuery = Article::where('valid_date', '>=', Carbon::now())
-                            ->whereHas('user', function($query) {
-                                    $query->where('blocked', false);
-                                });
+        // $articleQuery = Article::where('valid_date', '>=', Carbon::now())
+        //                     ->whereHas('user', function($query) {
+        //                             $query->where('blocked', false);
+        //                         });
 
-        if($request->category_ids) {
-            $articleQuery->whereHas('categories', function($query) use ($request) {
-                $query->whereIn('categories.id', $request->category_ids);
-            });
-        }
-        $articles = $articleQuery->latest()
-                                ->paginate(AppConstant::HOME_ARTICLE_PER_PAGE);
+        // if($request->category_ids) {
+        //     $articleQuery->whereHas('categories', function($query) use ($request) {
+        //         $query->whereIn('categories.id', $request->category_ids);
+        //     });
+        // }
+        // $articles = $articleQuery->latest()
+        //                         ->paginate(AppConstant::HOME_ARTICLE_PER_PAGE);
+        $articles = Article::orderBy('created_at', 'desc')->paginate(AppConstant::HOME_ARTICLE_PER_PAGE);
 
         return view('home.index')->with('articles', $articles);
     }

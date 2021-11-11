@@ -47,7 +47,7 @@ class LoginController extends Controller
      */
     public function username()
     {
-        return 'username'; 
+        return 'username';
     }
 
     /**
@@ -59,11 +59,10 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        $role = $user->role->name;
-
+        $role = $user->role->id;
         $redirectRoutes = [
-            'admin' => 'admin/dashboard',
-            'user' => 'user/profile'
+            1 => 'admin/dashboard',
+            2 => 'user/profile'
         ];
         return redirect($redirectRoutes[$role]);
     }
