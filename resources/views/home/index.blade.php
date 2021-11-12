@@ -12,9 +12,13 @@
     @foreach($articles as $article)
         <div class="card" style="width: 270px; display:inline-block">
             <div class="card-body">
-                <h5 class="card-title">{{ $article->title }}</h5>
-                <p><time datetime="{{ $article->created_at }}"> {{$article->created_at->diffForHumans()}} </time></p>
-                <p class="card-text">{{ $article->content}}</p>
+                @foreach ($users as $user)
+                    @if($user->id === $article->user_id)
+                        <h5 class="card-title">{{ $user->name }} đã đăng {{ $article->title }}</h5>
+                        <p><time datetime="{{ $article->created_at }}"> {{$article->created_at->diffForHumans()}} </time></p>
+                        <p class="card-text">{{ $article->content}}</p>
+                    @endif
+                @endforeach
             </div>
         </div>
     @endforeach

@@ -6,6 +6,7 @@ use App\Models\AppConstant;
 use App\Models\Article;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -39,8 +40,8 @@ class HomeController extends Controller
         // $articles = $articleQuery->latest()
         //                         ->paginate(AppConstant::HOME_ARTICLE_PER_PAGE);
 
-        // $articles = Article::orderBy('created_at', 'desc')->paginate(AppConstant::HOME_ARTICLE_PER_PAGE);
-        $articles = auth()->user()->articles()->orderBy('created_at', 'desc')->paginate(AppConstant::HOME_ARTICLE_PER_PAGE);
-        return view('home.index')->with('articles', $articles);
+        $articles = Article::orderBy('created_at', 'desc')->paginate(AppConstant::HOME_ARTICLE_PER_PAGE);
+        $users = User::all();
+        return view('home.index')->with('articles', $articles)->with('users', $users);
     }
 }
