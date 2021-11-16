@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Admin Phú Trần',
+    'title' => 'Login',
     'title_prefix' => '',
     'title_postfix' => '',
 

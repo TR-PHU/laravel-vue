@@ -22,24 +22,26 @@
             </div>
         </div>
     @endforeach
-    {{ $articles->links() }}
+    {{ $articles->links('vendor.pagination.custom') }}
     <create-article/>
 @endsection
 
 <style>
-    .w-5 {
-        display: none;
+    .pager {
+        margin-bottom: 0px;
     }
-
-    div.flex {
-        display: none;
+    .pager li {
+        margin: 40px 10px 20px 10px;
     }
-    div.hidden div:first-child{
-        display: none;
+    .pager:hover li span {
+        text-decoration: none;
     }
-    div.hidden div:last-child{
-        display: flex;
-        justify-content: center;
-        margin-top: 20px;
+    .pager:hover li a {
+        text-decoration: none;
+    }
+    .pager li {
+        padding: 4px 10px;
+        border: 1px solid #cccccc;
+        border-radius: 12px;
     }
 </style>
