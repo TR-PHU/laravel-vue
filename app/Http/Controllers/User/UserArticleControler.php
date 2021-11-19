@@ -82,6 +82,7 @@ class UserArticleControler extends Controller
     {
         $article->fill($request->all());
         $article->save();
+        $article->categories()->sync($request->category_ids);
         return redirect('/user/article');
     }
 
